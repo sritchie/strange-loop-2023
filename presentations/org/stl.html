@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Emmy</title>
+<meta name="author" content="Sam Ritchie"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="../reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="../reveal.js/dist/theme/solarized.css" id="theme"/>
+<link rel="stylesheet" href="../reveal.js/plugin/highlight/zenburn.css"/>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section>
+<section id="slide-org8391181">
+<h2 id="org8391181">Emmy</h2>
+<aside class="notes">
+<ul>
+<li>Hi!</li>
+<li>Clojure since 2010</li>
+<li>worked for big tech companies&#x2026;</li>
+<li>talk about what I've been doing since 2.5 years ago&#x2026;</li>
+
+</ul>
+
+</aside>
+
+<div id="outline-container-orgbf28c0b" class="outline-3">
+<h3 id="orgbf28c0b">Moldable Physics, Lispy Microworlds</h3>
+<p>
+<a href="https://samritchie.io/">Sam Ritchie</a>, Mentat Collective
+</p>
+
+<img width="30%" src="../images/emmy.png">
+
+<p>
+Clojure/Conj 2023
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org051dcdc">
+<h2 id="org051dcdc">SICM &amp; FDG</h2>
+<aside class="notes">
+<ul>
+<li>what are the books?</li>
+<li>message of impressionistic notation</li>
+<li>stick it to the physicists</li>
+<li>CLARITY THROUGH LISP!</li>
+
+</ul>
+
+</aside>
+
+<img height="500" src="../images/sicm.jpeg">
+<img height="500" src="../images/fdg.jpeg">
+
+</section>
+<section>
+<aside class="notes">
+<ul>
+<li>Saw this as a commandment.</li>
+<li>I will take notes as code!</li>
+<li>talk about the fear of rewriting another book</li>
+
+</ul>
+
+</aside>
+<p>
+"<b>programs must be written for people to read</b>, and only incidentally for
+machines to execute."
+</p>
+
+<small>~ Hal Abelson, Structure and Interpretation of Computer Programs</small>
+<br><img height="300px" src="../images/sicp.jpeg">
+
+</section>
+</section>
+<section>
+<section id="slide-org2e84081">
+<h2 id="org2e84081">MathBox</h2>
+<aside class="notes">
+<ul>
+<li>Earlier I had seen MathBox&#x2026;</li>
+<li>Steven Wittens</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section data-background-iframe="https://mathbox.org/math/fieldlines.html">
+<aside class="notes">
+<ul>
+<li>magnetic field lines??</li>
+<li>code performing itself</li>
+<li>PROBLEM: incompatible with abstraction</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-org41c5c48">
+<h3 id="org41c5c48">Typical "Fast" Code</h3>
+<aside class="notes">
+<ul>
+<li>Code == medium to communicate</li>
+<li>also a medium we use to <i>build</i> systems</li>
+<li>there is a tension.</li>
+
+</ul>
+
+</aside>
+
+<p class="codepen" data-height="500" data-default-tab="html,result" data-slug-hash="ExpVaw" data-user="zadvorsky" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/zadvorsky/pen/ExpVaw">
+  Double Double Pendulum</a> by Szenia Zadvornykh (<a href="https://codepen.io/zadvorsky">@zadvorsky</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+
+</section>
+</section>
+<section>
+<section id="slide-orgf266953">
+<h2 id="orgf266953">!!</h2>
+<aside class="notes">
+<ul>
+<li>So I did what any of us would do!</li>
+<li>spent years&#x2026;</li>
+<li>connect them, run in browser.</li>
+<li>I even started a substack!</li>
+<li>what a project&#x2026;</li>
+
+</ul>
+
+</aside>
+
+<img width="40%" src="../images/bulb.png">
+
+</section>
+</section>
+<section>
+<section id="slide-org89c16e7">
+<h2 id="org89c16e7">Emmy</h2>
+<aside class="notes">
+<ul>
+<li>that led me to Emmy, Colin</li>
+<li>computer algebra system in Clojure.</li>
+<li>other mentat projects: Leva, MathBox etc</li>
+
+</ul>
+
+</aside>
+
+<p>
+<a href="https://github.com/mentat-collective">https://github.com/mentat-collective</a>
+</p>
+<img width="60%" src="../images/emmy.png">
+
+</section>
+</section>
+<section>
+<section id="slide-org7c0741f">
+<h2 id="org7c0741f">Agenda</h2>
+<aside class="notes">
+<p>
+how Emmy bridges this performance gap
+</p>
+
+</aside>
+
+<ul>
+<li>Generics, Generics, Generics!</li>
+<li>Calculus with Generics</li>
+<li>Demos with Clerk and Physics</li>
+<li>What's next?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org97dc21d">
+<h2 id="org97dc21d">scmutils by GJS</h2>
+<aside class="notes">
+<ul>
+<li>Based on scmutils by GJS, co-creator of Scheme&#x2026;</li>
+<li>sitting on his academic web page</li>
+<li>65kloc</li>
+<li>RUNS on my machine, I can interrogate it at the REPL!</li>
+
+</ul>
+
+</aside>
+
+<img class="r-stretch" src="../images/gjs.jpg">
+
+</section>
+<section id="slide-org5c9c812">
+<h3 id="org5c9c812">Einstein's Field Equations</h3>
+<aside class="notes">
+<p>
+This is IN THE TESTS
+</p>
+
+</aside>
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(deftest einstein-field-equations-test
+  (with-literal-functions [R rho p]
+    (let [basis       (e/coordinate-system-&gt;basis spacetime-sphere)
+          g           (FLRW-metric 'c 'k R)
+          T_ij        ((e/drop2 g basis) (Tperfect-fluid rho p 'c g))
+          [d:dt d:dr] (e/coordinate-system-&gt;vector-basis spacetime-sphere)
+          K           (/ (* 8 'pi 'G) (expt 'c 4))]
+      (testing "first challenge (89s)"
+        (is (= '(/ (+ (* -8 G pi (expt (R t) 2) (rho t))
+                      (* -1 Lambda (expt c 2) (expt (R t) 2))
+                      (* 3 (expt c 2) k)
+                      (* 3 (expt ((D R) t) 2)))
+                   (expt (R t) 2))
+               (simplify
+                ((((Einstein-field-equation spacetime-sphere K)
+                   g 'Lambda T_ij)
+                  d:dt d:dt)
+                 ((point spacetime-sphere)
+                  (up 't 'r 'theta 'phi))))))))))
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org2844cc6">
+<h2 id="org2844cc6">Core Idea: Generics</h2>
+<aside class="notes">
+<p>
+Let's talk about the code idea:
+</p>
+
+<ul>
+<li>generics + mathematical objects</li>
+<li>multimethods and protocols</li>
+<li>STAY GENERIC AS LONG AS POSSIBLE and then specialize</li>
+<li>then happily build little compilers inside your code</li>
+
+</ul>
+
+</aside>
+
+
+<p>
+"If a system is built as a ball of mud, it is easy to add more mud.
+</p>
+
+<p>
+One organization for a ball of mud is a system erected on a substrate of
+generically extensible procedures."
+</p>
+
+<small>~ Hanson and Sussman, Software Design for Flexibility</small>
+
+</section>
+<section>
+<aside class="notes">
+<p>
+As Kir said, impl is so easy&#x2026;
+</p>
+<ul>
+<li>plus is already overloaded, so this opens it up</li>
+
+</ul>
+
+</aside>
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(+ 1 2)
+</code></pre>
+</div>
+
+<pre class="example">
+3
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(+ 1/2 1/3)
+</code></pre>
+</div>
+
+<pre class="example">
+5/6
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(+ 1 'x)
+</code></pre>
+</div>
+
+<pre class="example">
+(+ 1 x)
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(transduce (map square) + ['x 'y 'z])
+</code></pre>
+</div>
+<pre class="example">
+(+ (expt x 2) (expt y 2) (expt z 2))
+
+</pre>
+
+
+</section>
+<section>
+<aside class="notes">
+<ul>
+<li>Works on weirder objects</li>
+<li>ball of mud</li>
+<li>puzzler at the end</li>
+
+</ul>
+
+</aside>
+<div class="org-src-container">
+
+<pre><code class="clojure" >(+ sin cos)
+</code></pre>
+</div>
+
+<pre class="example">
+#function[clojure.lang.AFunction/1]
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >((+ sin cos) 'x)
+</code></pre>
+</div>
+
+<pre class="example">
+(+ (sin x) (cos x))
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >((square [+ *]) 'x 'y)
+</code></pre>
+</div>
+
+<pre class="example">
+(+ (* (+ x y) (+ x y)) (* x y x y))
+
+</pre>
+
+
+</section>
+<section>
+<aside class="notes">
+<ul>
+<li>also comes with a powerful simplifier</li>
+<li>performance shimmers&#x2026;</li>
+
+</ul>
+
+</aside>
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(defn unit-circle [angle]
+  [(cos angle)
+   (sin angle)])
+
+(defn mag [thing]
+  (sqrt (square thing)))
+</code></pre>
+</div>
+
+<pre class="example">
+#'prez/mag
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >((mag unit-circle) 'theta)
+</code></pre>
+</div>
+
+<pre class="example">
+(sqrt (+ (* (cos theta) (cos theta)) (* (sin theta) (sin theta))))
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(simplify
+ ((mag unit-circle) 'theta))
+</code></pre>
+</div>
+
+<pre class="example">
+1
+
+</pre>
+
+
+</section>
+<section>
+<aside class="notes">
+<ul>
+<li>Hints of speed</li>
+<li>little compiler</li>
+
+</ul>
+
+</aside>
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(defn fast! [f]
+  (let [sym  (gensym)
+        body (f sym)]
+    `(fn [~sym]
+       ~(simplify body))))
+</code></pre>
+</div>
+
+<pre class="example">
+#'prez/fast!
+
+</pre>
+
+
+<div class="org-src-container">
+
+<pre><code class="clojure" >(fast! (mag unit-circle))
+</code></pre>
+</div>
+
+<pre class="example">
+(clojure.core/fn [G__79973] 1)
+
+</pre>
+
+</section>
+</section>
+<section>
+<section id="slide-orgbee190a">
+<h2 id="orgbee190a">Calculus!</h2>
+<aside class="notes">
+<ul>
+<li>next let's make a new datatype.</li>
+
+</ul>
+
+</aside>
+
+</section>
+<section id="slide-org093c8f2">
+<h3 id="org093c8f2">Core Idea of Physics Simulation:</h3>
+<ul>
+<li>states depend on positions and velocities</li>
+<li>physics updates velocities</li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgdd5ceab">
+<h3 id="orgdd5ceab">Taylor Series Expansion</h3>
+<aside class="notes">
+<ul>
+<li>strange way of developing&#x2026;</li>
+<li>Math vs programming</li>
+<li>make up a new epsilon idea</li>
+
+</ul>
+
+</aside>
+
+<p>
+\[f(x) = f(a)+\frac{Df(a)}{1!}(x-a)+\frac{D^2f(a)}{2!}(x-a)^{2}+\cdots\]
+</p>
+
+<p data-fragment-index="1" class="fragment roll-in">
+\[f(a+\varepsilon) =
+f(a)+\frac{Df(a)}{1!}(\varepsilon)+\frac{D^2f(a)}{2!}(\varepsilon)^2+\cdots\]
+</p>
+
+</section>
+<section>
+<aside class="notes">
+<p>
+kill all the terms to the right
+</p>
+
+</aside>
+
+<p>
+\[\varepsilon^2 = 0\]
+</p>
+
+<p>
+that would give us&#x2026;
+</p>
+
+<p>
+\[f(a+\varepsilon) = f(a) + Df(a)\varepsilon\]
+</p>
+
+
+<p data-fragment-index="1" class="fragment roll-in">
+Apply it twice, get the chain rule!
+</p>
+
+<p data-fragment-index="1" class="fragment roll-in">
+\[\begin{aligned}
+g(f(a+\varepsilon)) &= g\left(f(a) + Df(a)\varepsilon\right) \\
+&= g\left(f(a)\right) + \left(Dg(f(a)))(Df(a)\right)\varepsilon
+\end{aligned}\]
+</p>
+
+</section>
+</section>
+<section>
+<section id="slide-orgedb7652">
+<h2 id="orgedb7652">=&gt; Emacs</h2>
+<aside class="notes">
+<ul>
+<li></li>
+
+</ul>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-orge0872e3">
+<h2 id="orge0872e3">❤️ Libre Software ❤️</h2>
+<aside class="notes">
+<ul>
+<li>Clojure library vs exact port</li>
+<li>immutable data structures, streams etc</li>
+<li>Not just performance!</li>
+<li>There is more to discover!</li>
+
+</ul>
+
+</aside>
+
+<p>
+<a href="https://github.com/mentat-collective">https://github.com/mentat-collective</a>
+</p>
+<img width="60%" src="../images/emmy.png">
+
+</section>
+<section id="slide-org188c83e">
+<h3 id="org188c83e">CAS as a Library?</h3>
+<aside class="notes">
+<ul>
+<li>Lots of diff environments</li>
+<li>really unusual</li>
+<li>piggyback on performance!</li>
+
+</ul>
+
+</aside>
+
+<ul>
+<li>Clojure/Script</li>
+<li>JavaScript, NPM</li>
+<li>SCI</li>
+<li>Clerk</li>
+<li>JSXGraph, Mafs, MathBox</li>
+<li>Leva, MathLive</li>
+
+</ul>
+
+</section>
+<section data-background-iframe="https://kloimhardt.github.io/cljtiles.html?page=freeparticle">
+<aside class="notes">
+<p>
+Slide
+</p>
+
+</aside>
+
+</section>
+<section data-background-iframe="https://kloimhardt.github.io/blog/hamiltonmechanics/2023/03/21/units-harmonic.html">
+<aside class="notes">
+<p>
+scheme interpreter in JS
+</p>
+
+</aside>
+
+</section>
+</section>
+<section>
+<section id="slide-org3c37c00">
+<h2 id="org3c37c00">What's next?</h2>
+<aside class="notes">
+<p>
+solves the bootstrapping problem&#x2026;
+HUGE amount of material
+</p>
+
+</aside>
+
+<ul>
+<li>More targets: dtype-next, JAX, etc</li>
+<li>SICM and FDG: Executable Textbooks</li>
+<li>Collaborative editing, simulation</li>
+<li>Break free from tiny glass!</li>
+
+</ul>
+
+</section>
+<section id="slide-orgb3bc7b0">
+<h3 id="orgb3bc7b0">LOGO's Microworlds</h3>
+<aside class="notes">
+<ul>
+<li>microworlds put you in the system!</li>
+<li>but it needs more batteries</li>
+
+</ul>
+
+</aside>
+
+<img class="r-stretch" src="../images/papert.jpeg">
+
+</section>
+<section data-background-iframe="https://paperprograms.org">
+
+</section>
+</section>
+<section>
+<section id="slide-org24fcffa">
+<h2 id="org24fcffa">Thanks!</h2>
+<aside class="notes">
+<ul>
+<li>questions?</li>
+<li>If this is interesting, let's talk!</li>
+
+</ul>
+
+</aside>
+
+<p>
+Sam Ritchie, Mentat Collective
+</p>
+
+<p>
+<a href="https://github.com/mentat-collective">https://github.com/mentat-collective</a>
+<a href="https://roadtoreality.substack.com">https://roadtoreality.substack.com</a>
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="../reveal.js/dist/reveal.js"></script>
+<script src="../reveal.js/plugin/notes/notes.js"></script>
+<script src="../reveal.js/plugin/highlight/highlight.js"></script>
+<script src="../reveal.js/plugin/search/search.js"></script>
+<script src="../reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: true,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+overview: true,
+
+transition: 'none',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealNotes, RevealHighlight, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>
