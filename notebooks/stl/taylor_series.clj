@@ -5,8 +5,7 @@
    :exclude [+ - * / = zero? compare
              numerator denominator ref partial
              infinite? abs])
-  (:require [stl.viewers :as cv :refer [multiviewer]]
-            [nextjournal.clerk :as clerk]
+  (:require [nextjournal.clerk :as clerk]
             [emmy.clerk :as ec]
             [emmy.calculus.derivative]
             [emmy.env :as e :refer :all]
@@ -33,7 +32,7 @@
 
 ;; Let's try it:
 
-^{::clerk/viewer multiviewer}
+^{::clerk/viewer ec/multiviewer}
 (-> (emmy.series/sin-series 'x)
     (series:sum 10))
 

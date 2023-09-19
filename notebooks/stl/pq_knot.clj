@@ -1,16 +1,21 @@
-^#:nextjournal.clerk
-{:toc true
- :visibility :hide-ns}
+^{:nextjournal.clerk/visibility {:code :hide}}
 (ns stl.pq-knot
+  #:nextjournal.clerk{:toc true}
   (:refer-clojure
    :exclude [+ - * / zero? compare divide numerator denominator
              infinite? abs ref partial =])
-  (:require [stl.viewers :refer [multiviewer]]
+  (:require [emmy.clerk :as ec]
             [emmy.env :as e :refer :all]
-            #_[emmy.expression.compile :as xc]
-            [nextjournal.clerk :as clerk]))
+            [emmy.leva :as leva]
+            [emmy.mathbox.plot :as plot]
+            [emmy.viewer :as ev]))
 
 ;; ## (p, q) Torus Knot
+
+{:nextjournal.clerk/width :wide}
+
+^{:nextjournal.clerk/visibility {:code :hide :result :hide}}
+(ec/install!)
 
 ;; Returns a function of `theta` that produces a 3-vector of the XYZ coordinates
 ;; of a `(p, q)` torus knot wrapped around a torus (donut) with major radius `R`
@@ -25,8 +30,41 @@
 
 ;; Let's take a look:
 
-^{::clerk/viewer multiviewer}
+^{:nextjournal.clerk/viewer ec/multiviewer}
 ((torus-knot 'R 'r 'p 'q) 'theta)
+
+(defn toroidal->rect [R r]
+  (fn [[theta phi]]
+    (* (rotate-z-matrix phi)
+       (up (+ R (* r (cos theta)))
+           0
+           (* r (sin theta))))))
+
+;; Here is a visualization of the torus knot wrapped around a torus:
+
+^{:nextjournal.clerk/visibility {:code :fold}}
+(ev/with-let [!opts {:R 2 :r 0.5 :p 7 :q 8}]
+  (plot/scene
+   (leva/controls
+    {:atom !opts
+     :folder {:name "Torus and Curve"}
+     :schema
+     {:R {:min 0.5 :max 2 :step 0.01}
+      :r {:min 0.5 :max 2 :step 0.01}
+      :p {:min 0 :max 32 :step 1}
+      :q {:min 0 :max 32 :step 1}}})
+
+   (plot/parametric-curve
+    {:f (ev/with-params {:atom !opts :params [:R :r :p :q]}
+          torus-knot)
+     :t [(- Math/PI) Math/PI]
+     :samples 512})
+
+   (plot/parametric-surface
+    {:f (ev/with-params {:atom !opts :params [:R :r]}
+          toroidal->rect)
+     :u [(- Math/PI) Math/PI]
+     :v [(- Math/PI) Math/PI]})))
 
 ;; Given a parametric function `f` of a single variable `t`, generates a
 ;; function of `t` that returns a matrix with columns `B`, `N`, `T` of the
@@ -36,12 +74,11 @@
 ;; expressions' [here](https://en.wikipedia.org/wiki/Frenet%E2%80%93Serret_formulas#Other_expressions_of_the_frame).
 
 (defn ->TNB [f]
-  (letfn [(make-unit [v]
-            (/ v (abs v)))
-          (T [theta]
-            (make-unit ((D f) theta)))
-          (N [theta]
-            (make-unit ((D T) theta)))]
+  (let [make-unit (fn [v] (/ v (abs v)))
+        T         (fn [theta]
+                    (make-unit ((D f) theta)))
+        N         (fn [theta]
+                    (make-unit ((D T) theta)))]
     (fn [t]
       (let [T-t (T t)
             N-t (N t)
@@ -56,12 +93,12 @@
    (* r (sin angle))
    0])
 
-^{::clerk/viewer multiviewer}
+^{:nextjournal.clerk/viewer ec/multiviewer}
 (circle 'r 'theta)
 
-^{::clerk/viewer multiviewer}
+^{:nextjournal.clerk/viewer ec/multiviewer}
 (simplify
- ((->TNB (partial circle 'r))
+ ((->TNB (fn [angle] (circle 'r angle)))
   't))
 
 ;; Given:
@@ -87,23 +124,47 @@
    (torus-knot R (+ r2 r3) p q)
    r3))
 
-
 ;; Let's take a look:
 
-#_
-(-> (xc/compile-state-fn
-     torus-knot-tube
-     ['R 'r_2 'r_3 'p 'q]
-     ['theta 'phi]
-     {:mode :js
-      :simplify? false
-      :calling-convention :primitive
-      :generic-params? true})
-    (nth 3)
-    (println))
-
-;; - [Trefoil knot](https://mathworld.wolfram.com/TrefoilKnot.html): (3, 2)
-;; - [Solomon's Seal knot](https://mathworld.wolfram.com/SolomonsSealKnot.html): (5, 2)
-;; ## Animation
-
-;; TODO get this thing working too.
+^{:nextjournal.clerk/width :full
+  :nextjournal.clerk/visibility {:code :fold}}
+(ev/with-let [!opts {:p 7 :q 8 :r1 1.791 :r2 0.95 :r3 0.1 :torus? false}]
+  (plot/scene
+   {:threestrap {:controls {:klass :trackball}}
+    :container {:style {:height "500px" :width "100%"}}
+    :camera [1 3 1]
+    :range [[-1 1] [-1 1] [-1 1]]
+    :axes []
+    :grids []}
+   (leva/controls
+    {:folder {:name "PQ Knot"}
+     :atom !opts
+     :schema
+     {:p {:min 0 :max 32 :step 1}
+      :q {:min 0 :max 32 :step 1}
+      :r1 {:min 0 :max 3 :step 0.001}
+      :r2 {:min 0.0 :max 2.5 :step 0.01}
+      :r3 {:min 0.0 :max 0.2 :step 0.01}}})
+   (plot/parametric-surface
+    {:f (ev/with-params
+          {:atom !opts :params [:r1 :r2 :r3 :p :q]}
+          torus-knot-tube)
+     :simplify? false
+     :color 0xcc0040
+     :opacity 1
+     :u-samples 512
+     :v-samples 16
+     :grid-color 0xffffff
+     :grid-opacity 1
+     :grid-width 3
+     :grid-u 100
+     :grid-v 4
+     :u [(- Math/PI) Math/PI]
+     :v [(- Math/PI) Math/PI]})
+   (list 'when (list :torus? (list 'deref !opts))
+         (plot/parametric-surface
+          {:f (ev/with-params {:atom !opts :params [:r1 :r2 :r3]}
+                (fn [r1 r2 r3]
+                  (toroidal->rect r1 (+ r2 r3))))
+           :u [(- Math/PI) Math/PI]
+           :v [(- Math/PI) Math/PI]}))))
