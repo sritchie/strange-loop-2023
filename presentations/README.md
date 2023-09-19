@@ -1,10 +1,10 @@
-# Clojure/Conj 2023 / MIT 6.945 Presentations
+# Strange Loop 2023
 
 Welcome!
 
-These presentations were developed using Emacs [org-mode](https://orgmode.org/)
-and the [org-re-reveal](https://gitlab.com/oer/org-re-reveal) package to
-generate [reveal.js](https://revealjs.com) presentations from the `org` files.
+I developed the presentation using Emacs [org-mode](https://orgmode.org/) and
+the [org-re-reveal](https://gitlab.com/oer/org-re-reveal) package to generate
+[reveal.js](https://revealjs.com) presentations from the `org` files.
 
 **Org files:**
 
@@ -12,15 +12,11 @@ All of the actual presentation code lives in `org`, just to keep things clean.
 
 Shared presentation options live in `org/reveal_header.org`.
 
-The org-mode talk files are
-
-- `org/stl.org`
-
-And the exported HTML files have matching names with `html` headers.
+The org-mode talk file is `org/stl.org`, and the exported HTML is `org/stl.org`.
 
 ## Viewing the Presentations
 
-To view any of the talks, simply open any of the `org/*.html` files.
+To view the talk, simply open `org/stl.html` in your browser.
 
 Some available options:
 
@@ -34,9 +30,9 @@ Some available options:
 
 ## Print as PDF
 
-If you would like a PDF of any of the talks:
+If you would like a PDF:
 
-- open any of the `*/.html`  files with `?print-pdf` appended
+- Open `org/stl.html?print-pdf`
 - Print as PDF from your browser, following the [instructions
   here](https://revealjs.com/pdf-export/) to tune the print dialogue correctly.
 
@@ -52,8 +48,8 @@ npm install
 npm run serve
 ```
 
-Then open http://localhost:8000 and navigate to the `org` folder. Click on any
-of the `html` files to view a presentation.
+Then open http://localhost:8000 and navigate to the `org` folder. Click on
+`org/stl.html` files to view a presentation.
 
 Now, `s` will open a presenter notes view.
 
@@ -72,12 +68,12 @@ Otherwise, follow the instructions at
 
 To generate HTML:
 
-- In any of the `org/*.org*` foles, run `C-c C-e` to view the export menu. `v`
-  will activate the `org-re-reveal` submenu, and `v` will generate html.
+- In `org/stl.org`, run `C-c C-e` to view the export menu. `v` will activate the
+  `org-re-reveal` submenu, and `v` will generate html.
 
-I usually just generate html with `C-c C-e v v` and let the webserver from above
-take care of auto-reloading. If you like, `C-c C-e v b` will open up your
-browser to the new HTML file once it's generated.
+I usually generate html with `C-c C-e v v` and let the webserver from above take
+care of auto-reloading. If you like, `C-c C-e v b` will open up your browser to
+the new HTML file once it's generated.
 
 ### Evaluating Code
 

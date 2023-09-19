@@ -10,7 +10,6 @@
             [emmy.mathbox :as box]
             [emmy.mathbox.plot :as plot]
             [emmy.viewer :as ev]
-            [emmy.viewer.compile]
             [emmy.viewer.physics]
             [emmy.mathbox.physics]
             [nextjournal.clerk :as clerk]))
@@ -124,12 +123,16 @@
     {:channels 2
      :items 2
      :live true
-     :expr `(fn [emit _i]
-              (let [theta (aget (:state (.-state ~!state)) 1)
-                    l     (:length (.-state ~params))]
-                (emit 0 0)
-                (emit (* l (~'Math/sin theta))
-                      (* l (- (~'Math/cos theta))))))}]
+     :expr
+     (list 'fn '[emit _i]
+           (list 'let ['theta
+                       (list 'aget (list :state
+                                         (list '.-state !state))
+                             1)
+                       'l     (list :length (list '.-state params))]
+                 '(emit 0 0)
+                 '(emit (* l (Math/sin theta))
+                        (* l (- (Math/cos theta))))))}]
    ['mathbox.primitives/Vector {:color 0xffffff :width width}]
    ['mathbox.primitives/Slice {:items [0 1]}]
    ['mathbox.primitives/Point {:color 0x909090 :size base-size}]
@@ -173,13 +176,15 @@
                              :background 0x000000}}}}
          children))
 
+^{:nextjournal.clerk/width :full
+  :nextjournal.clerk/visibility {:code :fold}}
 (let [initial-state [0 3 0]]
   (ev/with-let [!state  {:state initial-state}
                 !opts   {:length 1 :gravity 9.8 :mass 1 :simSteps 10}]
     [:<>
      (leva/controls
       {:atom !opts
-       :folder {:name "Cake"}
+       :folder {:name "Phase Portrait"}
        :schema
        {:length   {:min 0.5 :max 2 :step 0.01}
         :gravity  {:min 5 :max 15 :step 0.01}

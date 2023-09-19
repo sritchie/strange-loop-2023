@@ -8,13 +8,14 @@
             [emmy.env :as e :refer :all]
             [emmy.leva :as leva]
             [emmy.mathbox.plot :as plot]
-            [emmy.viewer :as ev]))
+            [emmy.viewer :as ev]
+            [nextjournal.clerk :as clerk]))
 
 ;; ## (p, q) Torus Knot
 
-{:nextjournal.clerk/width :wide}
+{::clerk/width :wide}
 
-^{:nextjournal.clerk/visibility {:code :hide :result :hide}}
+^{::clerk/visibility {:code :hide :result :hide}}
 (ec/install!)
 
 ;; Returns a function of `theta` that produces a 3-vector of the XYZ coordinates
@@ -30,8 +31,8 @@
 
 ;; Let's take a look:
 
-^{:nextjournal.clerk/viewer ec/multiviewer}
-((torus-knot 'R 'r 'p 'q) 'theta)
+(clerk/with-viewer ec/multiviewer
+  ((torus-knot 'R 'r 'p 'q) 'theta))
 
 (defn toroidal->rect [R r]
   (fn [[theta phi]]
@@ -93,13 +94,12 @@
    (* r (sin angle))
    0])
 
-^{:nextjournal.clerk/viewer ec/multiviewer}
-(circle 'r 'theta)
+(clerk/with-viewer ec/multiviewer
+  (circle 'r 'theta))
 
-^{:nextjournal.clerk/viewer ec/multiviewer}
-(simplify
- ((->TNB (fn [angle] (circle 'r angle)))
-  't))
+(clerk/with-viewer ec/multiviewer
+  ((->TNB (fn [angle] (circle 'r angle)))
+   't))
 
 ;; Given:
 
@@ -136,6 +136,7 @@
     :range [[-1 1] [-1 1] [-1 1]]
     :axes []
     :grids []}
+
    (leva/controls
     {:folder {:name "PQ Knot"}
      :atom !opts
@@ -145,6 +146,7 @@
       :r1 {:min 0 :max 3 :step 0.001}
       :r2 {:min 0.0 :max 2.5 :step 0.01}
       :r3 {:min 0.0 :max 0.2 :step 0.01}}})
+
    (plot/parametric-surface
     {:f (ev/with-params
           {:atom !opts :params [:r1 :r2 :r3 :p :q]}
