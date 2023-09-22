@@ -31,65 +31,47 @@ Strange Loop 2023
 
 ** ...
 #+begin_notes
-- What's changed since stl?
+- What's changed since stl2017?
 #+end_notes
 
 #+REVEAL: split data-background="../images/kids.JPG"
 #+begin_notes
 - I'm a dad now, 3 kids
 - faced with sharing with them what I love.
-- thinking about the culture of what we love here.
+- what is the strange loop culture? how to comm?
+-
 #+end_notes
 
 ** Transmitting Culture
 #+begin_notes
 - Music, literature, easy...
 - code better...
-- you can perform these things!
+- story, community, perform
 #+end_notes
 
 ** Culture of Math & Physics
 #+begin_notes
-- What is the culture?
-- you can model the world! We are seekers!
-- abstraction, math, physics, hard!
+- math, physics bound up behind abstraction!
 - symbol filter
-
-TODO simplify:
-
-My work on the executable textbook project started from a place of deep
-frustration with the symbol-heavy feeling of modern STEM education. Unlike music
-or artistic education, the pencil-and-paper symbolic manipulations I spent years
-learning are disconnected from the tools and mental models used by working
-engineers.
+- What is the culture?
+- == you can model the world! We are seekers!
 #+end_notes
 
-#+REVEAL_HTML: <img width="100%" src="../images/geodesics.png">
+#+REVEAL_HTML: <img width="60%" src="../images/geodesics.png">
 
 * Vision!
 #+begin_notes
-- beyond the glass
 - wanted to contribute something, build tools
 - I went looking for inspiration, AnnMarie etc
 - so much out there
+- not hopeless, not nice defaults.
 #+end_notes
 
 ** LOGO's Microworlds
 #+begin_notes
-- There is prior art for this! lots of it of course...
+- prior art! lots of course...
 - microworlds put you in the system!
-- but it needs more batteries
-
-Imagine a world instead where, starting in elementary school, kids encounter
-geometry, math and physics through interactive "microworlds", or playful
-simulations designed to explore ideas like motion, balance and gravity. As
-students matured they'd discover that these microworlds formed the spine of a
-series of executable textbooks, with the mathematics of ideas like
-electromagnetism augmented by powerful circuit simulations. Usually-dry
-mathematics would gain the ability to perform itself for a student, and the
-student, by taking their notes in this computational environment, would build up
-a portfolio of tangible, executable code and models over the course of their
-education.
+- needs more batteries
 #+end_notes
 
 #+REVEAL_HTML: <img class="r-stretch" src="../images/papert.jpeg">
@@ -97,7 +79,8 @@ education.
 #+REVEAL: split data-background-size=contain data-background-image="../images/logolang.png"
 #+begin_notes
 - immediately getting beautiful stuff
-- stuck, rule of 360
+- stuck? rule of 360
+- teachers drawn in, playful
 #+end_notes
 
 #+REVEAL: split data-background-iframe="https://dynamicland.org"
@@ -114,7 +97,6 @@ National treasure!! But not really interactive.
 #+REVEAL: split data-background-size=contain data-background-image="../images/diamondage.jpeg"
 #+begin_notes
 AYLIP, community baked in
-- TODO check exact details
 #+end_notes
 
 ** SICM & FDG
@@ -132,7 +114,10 @@ AYLIP, community baked in
 ** Euler-Lagrange Equations
 
 #+begin_notes
-Sussman hooked me with the culture question!!
+- BUT he went really, really far...
+- no topping out!
+- also Sussman hooked me with the culture note.
+- no visuals
 #+end_notes
 
 #+ATTR_REVEAL: :frag t :frag_idx 2
@@ -155,54 +140,20 @@ $$D\left(\left(\partial_{2} L\right) \circ \left(\Gamma[w]\right)\right)
 * Steps
 
 #+begin_notes
-The CHALLENGE is to build something that feels like it has come from a
-community.
-
-Not your typical codebase.
-
-I've attempted to clear a path toward this vision by:
-
- - Building Emmy, a state-of-the-art computer algebra system, like Mathematica
-   capable of running in a browser or on a modern workstation
-
- - Creating a library of modern 2D and 3D visualization plugins capable of
-   exploring ideas in mathematics and physics from elementary school up through
-   MIT-graduate-level of sophistication
-
- - Building out a notebook interface capable of allowing students to work with
-   powerful mathematical tools in a collaborative way, almost like Google Docs
-   for a computing environment, with instant feedback and access to computing
-   resources
+- Not your typical codebase.
 #+end_notes
 
 #+ATTR_REVEAL: :frag (grow)
-1. Build a CAS that can bring physics to life
+1. Build a visual CAS that can bring physics to life
 2. Do it in a way that seeds the culture
-3. Hoist it into the browser
+3. and runs anywhere (browser, robots...)
 4. Make it collaborative
 5. Build a community, beyond the glass
 
 ** Current State
 #+begin_notes
-- Just this August I've got everything running in editable, you-can-play-with-this form
-
-- I've also joined the MIT Probabilistic Computing Project where we'll be
-  building out these ideas.
-
-Former update, this needs to change:
-
-The first two items are substantially complete, and I'm working on the
-collaborative piece of the third now. Just last week Gerald Sussman at MIT
-committed to teaching his graduate-level fall physics course with these tools,
-and the MIT Probabilistic Computing Project reached out about teaching 3 courses
-in probabilistic programming this fall, and extending Emmy to be able to train
-machine learning models and deploy them inside the executable textbook
-environment.
-
-I've recently broken into the communal project and I want to share updates.
-Shared runtime; let me tell you what we have and how you can help me.
-
-- lots of work here by Martin, Jack, Matt,
+- August: everything here quite recent, plays everywhere
+- lots of work here by Colin, Martin, Jack, nextjournal, Matt, Borkdude
 #+end_notes
 
 #+REVEAL: split data-background-iframe="http://localhost:7777/notebooks/stl/pq_knot/edit.clj"
@@ -254,7 +205,9 @@ Emmy!
 
 #+REVEAL: split
 #+begin_notes
-talk about how this is built
+- if you want to play together, you need mud!
+- rebuild in Clojure on top of Colin's work
+- ClojureScript, browser
 #+end_notes
 
 "If a system is built as a ball of mud, it is easy to add more mud.
@@ -266,6 +219,8 @@ generically extensible procedures."
 
 #+REVEAL: split
 #+begin_notes
+- clojure does not support autodiff
+- but we can add it in
 - plus is already overloaded, so this opens it up
 #+end_notes
 
@@ -375,6 +330,10 @@ generically extensible procedures."
 :
 
 * Code as Literature
+#+begin_notes
+- another thing I stuck to...
+- not normal
+#+end_notes
 
 #+REVEAL: split
 #+begin_notes
@@ -391,7 +350,7 @@ machines to execute."
 * MathBox
 #+begin_notes
 - Earlier I had seen MathBox...
-- Main contribution is plugging these together
+- viz were missing
 #+end_notes
 
 #+REVEAL: split data-background-iframe="https://mathbox.org/math/fieldlines.html"
@@ -404,6 +363,7 @@ machines to execute."
 #+REVEAL: split data-background-iframe="https://2.maria.cloud/gist/30dbb25a2d2eb7324e0aad1097c459ae"
 #+begin_notes
 - So I was actually able to build a system where these two interact...
+- mention Maria
 - viz as first class objects
 #+end_notes
 
@@ -412,9 +372,17 @@ machines to execute."
 3D system as values
 #+end_notes
 
-#+REVEAL: split data-background-iframe="http://localhost:7777/notebooks/stl/toroid/edit.clj"
+#+REVEAL: split
+#+REVEAL_HTML: <img width="70%" src="../images/geodesics.png">
+
+#+REVEAL: split data-background-iframe="https://sritchie.github.io/strange-loop-2023/notebooks/stl/toroid/edit"
 #+begin_notes
 editable torus, in the slides!!
+#+end_notes
+
+#+REVEAL: split data-background-iframe="https://sritchie.github.io/strange-loop-2023/notebooks/stl/klein/edit"
+#+begin_notes
+klein
 #+end_notes
 
 #+REVEAL: split data-background-iframe="https://emmy-viewers.mentat.org/dev/examples/simulation/ellipsoid/edit"
@@ -422,28 +390,34 @@ editable torus, in the slides!!
 animating ellipsoid
 #+end_notes
 
+#+REVEAL: split data-background-iframe="https://sritchie.github.io/strange-loop-2023/notebooks/stl/phase_portrait/edit"
+#+begin_notes
+phase portrait
+#+end_notes
+
 * What's next?
 #+begin_notes
-Get out of the machine
+- lots of components that can run anywhere!
+- add batteries to things like logo, dynamicland
+- out of the machine
+- build the prequel
 #+end_notes
 
 #+REVEAL: split data-background="../images/nurse_log.jpeg"
 #+begin_notes
-- Nurse log
-- lots of material but we want to get out!
+- Library as nurse log
+- executable wikipedia
 #+end_notes
 
 #+REVEAL: split data-background-iframe="https://reality.mentat.org/essays/reality/introduction"
 #+begin_notes
-road to reality
+- I've also started writing...
+- road to reality
 #+end_notes
 
 #+REVEAL: split
 #+begin_notes
-Design choices are aiming at environments OUT of the machine. Combo of community
-play, then sensors, new wave.
-
-Coming next is the ability to collaborate in real-time in a shared runtime.
+next: ability to collaborate in real-time in a shared runtime.
 social models etc.
 #+end_notes
 
@@ -451,15 +425,15 @@ social models etc.
 
 #+REVEAL: split
 #+begin_notes
-- Built Emmy
-- Runs in the browser, full computer algebra system you can use
-- Emmy of course, what's emmy
-
-YOU CAN HELP ME by writing, playing, using this code, teaching people you know
-something and handing it off and then sharing it with me so I can be a hub for a
+- I've also joined the MIT Probabilistic Computing Project where we'll be
+  building out these ideas.
+Help by writing, playing, using this code
+- teaching people you know something and handing it off and then sharing it with me so I can be a hub for a
 while as this thing lifts off.
 #+end_notes
 
 #+REVEAL_HTML: <img width="30%" src="../images/emmy.png">
+
+We're hiring!
 
 https://reality.mentat.org

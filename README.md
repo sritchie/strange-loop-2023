@@ -26,6 +26,7 @@ the editor in the browser!)
 - [Phase Portrait of the Pendulum](https://sritchie.github.io/strange-loop-2023/notebooks/stl/phase_portrait)
 - [Geodesics of a Torus](https://sritchie.github.io/strange-loop-2023/notebooks/stl/toroid)
 - [Geodesics Klein bottles](https://sritchie.github.io/strange-loop-2023/notebooks/stl/klein)
+- [Animated Particle on an Ellipsoid](https://sritchie.github.io/strange-loop-2023/notebooks/stl/ellipsoid)
 
 ## Links
 
