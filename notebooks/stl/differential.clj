@@ -10,6 +10,9 @@
             [nextjournal.clerk :as clerk]))
 
 ;; # Generics and Calculus
+;;
+;; This namespace explores visualizations for "dual numbers", the data type at
+;; the heart of forward-mode automatic differentiation.
 
 ;; This function returns a dual number, $x+\varepsilon$.
 

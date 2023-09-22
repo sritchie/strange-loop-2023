@@ -23,8 +23,9 @@ the editor in the browser!)
 - [Taylor Series](https://sritchie.github.io/strange-loop-2023/notebooks/stl/taylor_series)
 - [Dual Number Visualization](https://sritchie.github.io/strange-loop-2023/notebooks/stl/differential)
 - [(p, q) torus knot](https://sritchie.github.io/strange-loop-2023/notebooks/stl/pq_knot)
-- [Geodesics of a Torus](https://sritchie.github.io/strange-loop-2023/notebooks/stl/toroid)
 - [Phase Portrait of the Pendulum](https://sritchie.github.io/strange-loop-2023/notebooks/stl/phase_portrait)
+- [Geodesics of a Torus](https://sritchie.github.io/strange-loop-2023/notebooks/stl/toroid)
+- [Geodesics Klein bottles](https://sritchie.github.io/strange-loop-2023/notebooks/stl/klein)
 
 ## Links
 
@@ -54,6 +55,7 @@ Tasks](https://book.babashka.org/#tasks) declared in `bb.edn`:
 ```sh
 bb tasks
 ```
+
 ## Presentations
 
 The presentation itself lives in `presentations/org/stl.html`. see

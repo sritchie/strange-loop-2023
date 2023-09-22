@@ -401,17 +401,15 @@ machines to execute."
 - PROBLEM: incompatible with abstraction
 #+end_notes
 
-#+REVEAL: split data-background-iframe="https://2.maria.cloud/gist/b94f923167a574acce2b534aa9f38bc9"
+#+REVEAL: split data-background-iframe="https://2.maria.cloud/gist/30dbb25a2d2eb7324e0aad1097c459ae"
 #+begin_notes
 - So I was actually able to build a system where these two interact...
-- mathbox as first class objects
-- TODO demos?
-- taylor series
+- viz as first class objects
 #+end_notes
 
-#+REVEAL: split data-background-iframe="https://emmy-viewers.mentat.org/dev/examples/simulation/toroid"
+#+REVEAL: split data-background-iframe="https://2.maria.cloud/gist/0405c3427c88326a181b307371f939bc"
 #+begin_notes
-TODO what is my goal here??
+3D system as values
 #+end_notes
 
 #+REVEAL: split data-background-iframe="http://localhost:7777/notebooks/stl/toroid/edit.clj"

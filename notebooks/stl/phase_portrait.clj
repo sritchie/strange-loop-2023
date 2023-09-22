@@ -14,18 +14,27 @@
             [emmy.mathbox.physics]
             [nextjournal.clerk :as clerk]))
 
-;; ## Phase Portrait
+;; ## Phase Portrait of the Pendulum
 
 ^{::clerk/visibility {:code :hide :result :hide}}
 (ec/install!)
 
 {::clerk/width :wide}
 
-;; potential energy term:
+;; This example starts with an energy-based description of a pendulum, and uses
+;; this to power an interactive "phase portrait".
+;;
+;; First, we'll write the higher-order function `T`. `T` takes the mass and
+;; length of a pendulum and returns the pendulum's kinetic energy, expressed in
+;; rectangular coordinates.
 
 (defn T [m l]
   (fn [[_ _ thetadot]]
     (* 1/2 m (square (* l thetadot)))))
+
+;; Next, we'll write down the gravitational potential energy, `V`, as a higher
+;; order function. This takes gravity, mass and the pendulum's length and
+;; returns a new function of `theta`, the angle of the pendulum off of center.
 
 (defn V [g m l]
   (fn [theta]
@@ -37,14 +46,16 @@
 
 ;; ## Equations
 
-;; first step is show that there is some symbolic goodness.
+;; Here's a symbolic representation of the "Lagrangian" of the system, the
+;; difference between the kinetic and potential energies:
 
 (ec/->TeX
  (simplify
   ((L-pendulum 'g 'm 'l)
    (up 't 'theta 'thetadot))))
 
-;; Can we show eq of motion?
+;; And here are the equations of motion. These are equations that have to remain
+;; true as the system evolves.
 
 (ec/->TeX
  (simplify
@@ -52,7 +63,7 @@
     (literal-function 'theta))
    't)))
 
-;; ## Axes
+{::clerk/visibility {:code :hide :result :hide}}
 
 (defn well-axes []
   [:<>
@@ -111,8 +122,6 @@
      :initial-state initial-state
      :atom          !state})])
 
-;; ## Animate Pendulum
-
 (defn pendulum
   [{:keys [!state params width base-size bob-size segments]
     :or {bob-size  10
@@ -146,8 +155,6 @@
     :position [-0.5 0.35 0]}
    (pendulum {:!state !state :params params})))
 
-;; ## Phase Portrait
-
 (defn phase-scene [& children]
   (apply emmy.mathbox.plot/cartesian
          {:range [[-4 4] [-8 8]]
@@ -176,8 +183,10 @@
                              :background 0x000000}}}}
          children))
 
+;; Given the above, we can animate a little workbench with various entries:
+
 ^{:nextjournal.clerk/width :full
-  :nextjournal.clerk/visibility {:code :fold}}
+  :nextjournal.clerk/visibility {:code :fold :result :show}}
 (let [initial-state [0 3 0]]
   (ev/with-let [!state  {:state initial-state}
                 !opts   {:length 1 :gravity 9.8 :mass 1 :simSteps 10}]

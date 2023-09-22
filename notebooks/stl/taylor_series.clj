@@ -13,6 +13,9 @@
             [nextjournal.clerk :as clerk]))
 
 ;; ## Taylor Series Visualizations
+;;
+;; This namespace contains visualizations of the taylor series expansion of...
+;; well, of any function you want to pass in!
 
 ^{::clerk/visibility {:code :hide :result :hide}}
 (ec/install!)
@@ -55,24 +58,3 @@
 (visualize sin 5)
 (visualize exp 5)
 (visualize (comp log #(+ % 1)) 5)
-
-;; ## Mafs!
-
-(defn scene [& children]
-  (apply
-   mafs/mafs {:zoom {:min 0.1 :max 2}
-              :view-box {:x [-1 1] :y [-1 1]}}
-   (mafs/cartesian {:subdivisions 4})
-   children))
-
-(scene
- (mafs/parametric
-  {:t [0 (* 2 pi)]
-   :xy (up cos sin)
-   :color :pink}))
-
-(scene
- (mafs/parametric
-  {:t [0 (* 2 pi)]
-   :xy (up cos (comp sin (partial * 3)))
-   :color :pink}))

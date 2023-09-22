@@ -12,6 +12,12 @@
             [nextjournal.clerk :as clerk]))
 
 ;; ## (p, q) Torus Knot
+;;
+;; A (p,q) torus knot is a loop of string that winds `q` times through the hole
+;; of a donut, and revolves `p` full times around the axis of revolution, before
+;; joining up again.
+;;
+;; Let's play!
 
 {::clerk/width :wide}
 
