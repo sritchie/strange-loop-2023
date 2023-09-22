@@ -1,4 +1,4 @@
-# conj/talk
+# Strange Loop 2023
 
 [![License][license]][license-url]
 
@@ -17,16 +17,22 @@ and save any of the demos in `notebooks` to render them in Clerk.
 ## Demos
 
 The demos all live at https://sritchie.github.io/strange-loop-2023/. Here's a
-full directory of direct links. (Append `/edit` to any of these URLs to try out
-the editor in the browser!)
+full directory of direct links.
 
-- [Taylor Series](https://sritchie.github.io/strange-loop-2023/notebooks/stl/taylor_series)
-- [Dual Number Visualization](https://sritchie.github.io/strange-loop-2023/notebooks/stl/differential)
-- [(p, q) torus knot](https://sritchie.github.io/strange-loop-2023/notebooks/stl/pq_knot)
-- [Phase Portrait of the Pendulum](https://sritchie.github.io/strange-loop-2023/notebooks/stl/phase_portrait)
-- [Geodesics of a Torus](https://sritchie.github.io/strange-loop-2023/notebooks/stl/toroid)
-- [Geodesics Klein bottles](https://sritchie.github.io/strange-loop-2023/notebooks/stl/klein)
-- [Animated Particle on an Ellipsoid](https://sritchie.github.io/strange-loop-2023/notebooks/stl/ellipsoid)
+Maria demos:
+
+- [First-Class Visualizations](https://2.maria.cloud/gist/30dbb25a2d2eb7324e0aad1097c459ae)
+- [MathBox + Emmy at Strange Loop](https://2.maria.cloud/gist/0405c3427c88326a181b307371f939bc)
+
+Clerk demos:
+
+- [Taylor Series](https://sritchie.github.io/strange-loop-2023/notebooks/stl/taylor_series/edit)
+- [Dual Number Visualization](https://sritchie.github.io/strange-loop-2023/notebooks/stl/differential/edit)
+- [(p, q/edit) torus knot](https://sritchie.github.io/strange-loop-2023/notebooks/stl/pq_knot/edit)
+- [Phase Portrait of the Pendulum](https://sritchie.github.io/strange-loop-2023/notebooks/stl/phase_portrait/edit)
+- [Geodesics of a Torus](https://sritchie.github.io/strange-loop-2023/notebooks/stl/toroid/edit)
+- [Geodesics Klein bottles](https://sritchie.github.io/strange-loop-2023/notebooks/stl/klein/edit)
+- [Animated Particle on an Ellipsoid](https://sritchie.github.io/strange-loop-2023/notebooks/stl/ellipsoid/edit)
 
 ## Links
 

@@ -38,8 +38,9 @@ Strange Loop 2023
 #+begin_notes
 - I'm a dad now, 3 kids
 - faced with sharing with them what I love.
-- what is the strange loop culture? how to comm?
--
+- we have a special thing here!
+- what is the strange loop culture? how to share?
+
 #+end_notes
 
 ** Transmitting Culture
@@ -96,20 +97,22 @@ National treasure!! But not really interactive.
 
 #+REVEAL: split data-background-size=contain data-background-image="../images/diamondage.jpeg"
 #+begin_notes
-AYLIP, community baked in
+- AYLIP, what
+- not even real :)
 #+end_notes
 
 ** SICM & FDG
 #+begin_notes
-- what are the books?
+- unlikely hero!
 - message of impressionistic notation
 - stick it to the physicists
 - CLARITY THROUGH LISP!
-- ... no good for kids
 #+end_notes
 
 #+REVEAL_HTML: <img height="500" src="../images/sicm.jpeg">
 #+REVEAL_HTML: <img height="500" src="../images/fdg.jpeg">
+
+#+REVEAL: split data-background-size=contain data-background-image="../images/lisp_xkcd.jpeg"
 
 ** Euler-Lagrange Equations
 
@@ -118,6 +121,7 @@ AYLIP, community baked in
 - no topping out!
 - also Sussman hooked me with the culture note.
 - no visuals
+- ... no good for kids
 #+end_notes
 
 #+ATTR_REVEAL: :frag t :frag_idx 2
@@ -156,7 +160,7 @@ $$D\left(\left(\partial_{2} L\right) \circ \left(\Gamma[w]\right)\right)
 - lots of work here by Colin, Martin, Jack, nextjournal, Matt, Borkdude
 #+end_notes
 
-#+REVEAL: split data-background-iframe="http://localhost:7777/notebooks/stl/pq_knot/edit.clj"
+#+REVEAL: split data-background-iframe="https://sritchie.github.io/strange-loop-2023/notebooks/stl/pq_knot"
 #+begin_notes
 Emmy!
 
@@ -349,8 +353,8 @@ machines to execute."
 
 * MathBox
 #+begin_notes
-- Earlier I had seen MathBox...
 - viz were missing
+- Earlier I had seen MathBox...
 #+end_notes
 
 #+REVEAL: split data-background-iframe="https://mathbox.org/math/fieldlines.html"
@@ -385,7 +389,7 @@ editable torus, in the slides!!
 klein
 #+end_notes
 
-#+REVEAL: split data-background-iframe="https://emmy-viewers.mentat.org/dev/examples/simulation/ellipsoid/edit"
+#+REVEAL: split data-background-iframe="https://sritchie.github.io/strange-loop-2023/notebooks/stl/ellipsoid/edit"
 #+begin_notes
 animating ellipsoid
 #+end_notes
@@ -423,14 +427,14 @@ social models etc.
 
 #+REVEAL_HTML: <img class="r-stretch" src="../images/papert.jpeg">
 
-#+REVEAL: split
+#+REVEAL: split data-background-size=contain data-background-image="../images/diamondage.jpeg"
 #+begin_notes
+- AYLIP, community baked in
 - I've also joined the MIT Probabilistic Computing Project where we'll be
   building out these ideas.
-Help by writing, playing, using this code
-- teaching people you know something and handing it off and then sharing it with me so I can be a hub for a
-while as this thing lifts off.
 #+end_notes
+
+#+REVEAL: split
 
 #+REVEAL_HTML: <img width="30%" src="../images/emmy.png">
 
